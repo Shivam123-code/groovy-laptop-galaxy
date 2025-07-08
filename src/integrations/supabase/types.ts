@@ -14,7 +14,141 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      categories: {
+        Row: {
+          created_at: string
+          display_order: number
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      laptops: {
+        Row: {
+          battery: string
+          brand: string
+          category: string
+          created_at: string
+          description: string
+          display: string
+          features: string[]
+          graphics: string
+          id: string
+          images: string[]
+          in_stock: boolean
+          is_featured: boolean
+          is_new: boolean
+          is_trending: boolean
+          original_price: number | null
+          os: string
+          price: number
+          processor: string
+          ram: string
+          rating: number
+          review_count: number
+          short_description: string
+          storage: string
+          title: string
+          updated_at: string
+          weight: string
+        }
+        Insert: {
+          battery: string
+          brand: string
+          category: string
+          created_at?: string
+          description: string
+          display: string
+          features?: string[]
+          graphics: string
+          id?: string
+          images?: string[]
+          in_stock?: boolean
+          is_featured?: boolean
+          is_new?: boolean
+          is_trending?: boolean
+          original_price?: number | null
+          os: string
+          price: number
+          processor: string
+          ram: string
+          rating?: number
+          review_count?: number
+          short_description: string
+          storage: string
+          title: string
+          updated_at?: string
+          weight: string
+        }
+        Update: {
+          battery?: string
+          brand?: string
+          category?: string
+          created_at?: string
+          description?: string
+          display?: string
+          features?: string[]
+          graphics?: string
+          id?: string
+          images?: string[]
+          in_stock?: boolean
+          is_featured?: boolean
+          is_new?: boolean
+          is_trending?: boolean
+          original_price?: number | null
+          os?: string
+          price?: number
+          processor?: string
+          ram?: string
+          rating?: number
+          review_count?: number
+          short_description?: string
+          storage?: string
+          title?: string
+          updated_at?: string
+          weight?: string
+        }
+        Relationships: []
+      }
+      price_ranges: {
+        Row: {
+          created_at: string
+          display_order: number
+          id: string
+          label: string
+          max_price: number | null
+          min_price: number
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          label: string
+          max_price?: number | null
+          min_price: number
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          label?: string
+          max_price?: number | null
+          min_price?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
