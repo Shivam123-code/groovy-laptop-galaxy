@@ -1,12 +1,27 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Search, ShoppingCart, User, Heart } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Menu, X, Search, ShoppingCart, User, Heart, LogOut, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "@/contexts/AuthContext";
+import { useCart } from "@/hooks/useCart";
+import { useWishlist } from "@/hooks/useWishlist";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, isAdmin, signOut } = useAuth();
+  const { cartCount } = useCart();
+  const { wishlistItems } = useWishlist();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -15,7 +30,13 @@ const Header = () => {
     { name: "Laptops", path: "/laptops" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
+    ...(isAdmin ? [{ name: "Admin", path: "/admin" }] : []),
   ];
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
 
   return (
     <header className="sticky top-0 z-50 glass-card border-b border-card-border">
@@ -61,18 +82,85 @@ const Header = () => {
 
           {/* Action Buttons */}
           <div className="flex items-center space-x-2">
-            <Button variant="ghost" size="sm" className="hidden sm:flex">
-              <Heart className="w-4 h-4" />
-            </Button>
-            <Button variant="ghost" size="sm" className="hidden sm:flex">
-              <User className="w-4 h-4" />
-            </Button>
-            <Button variant="ghost" size="sm" className="relative">
-              <ShoppingCart className="w-4 h-4" />
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-xs rounded-full flex items-center justify-center text-primary-foreground">
-                0
-              </span>
-            </Button>
+            {user && (
+              <>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="hidden sm:flex relative"
+                  onClick={() => navigate('/wishlist')}
+                >
+                  <Heart className="w-4 h-4" />
+                  {wishlistItems.length > 0 && (
+                    <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-xs rounded-full flex items-center justify-center text-primary-foreground">
+                      {wishlistItems.length}
+                    </span>
+                  )}
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="relative"
+                  onClick={() => navigate('/cart')}
+                >
+                  <ShoppingCart className="w-4 h-4" />
+                  {cartCount > 0 && (
+                    <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-xs rounded-full flex items-center justify-center text-primary-foreground">
+                      {cartCount}
+                    </span>
+                  )}
+                </Button>
+              </>
+            )}
+
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="hidden sm:flex">
+                    <User className="w-4 h-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>{user.email}</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  {isAdmin && (
+                    <>
+                      <DropdownMenuItem onClick={() => navigate('/admin')}>
+                        <Shield className="w-4 h-4 mr-2" />
+                        Admin Panel
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                    </>
+                  )}
+                  <DropdownMenuItem onClick={() => navigate('/profile')}>
+                    <User className="w-4 h-4 mr-2" />
+                    Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate('/cart')}>
+                    <ShoppingCart className="w-4 h-4 mr-2" />
+                    Cart ({cartCount})
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate('/wishlist')}>
+                    <Heart className="w-4 h-4 mr-2" />
+                    Wishlist ({wishlistItems.length})
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleSignOut}>
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="hidden sm:flex"
+                onClick={() => navigate('/auth')}
+              >
+                <User className="w-4 h-4" />
+              </Button>
+            )}
 
             {/* Mobile Menu Button */}
             <Button

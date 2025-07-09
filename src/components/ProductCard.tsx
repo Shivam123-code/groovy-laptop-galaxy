@@ -3,12 +3,28 @@ import { Heart, ShoppingCart, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Laptop } from "@/data/laptops";
+import { useCart } from "@/hooks/useCart";
+import { useWishlist } from "@/hooks/useWishlist";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface ProductCardProps {
   laptop: Laptop;
 }
 
 const ProductCard = ({ laptop }: ProductCardProps) => {
+  const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
+  const { user } = useAuth();
+
+  const handleAddToCart = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    await addToCart(laptop.id);
+  };
+
+  const handleToggleWishlist = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    await toggleWishlist(laptop.id);
+  };
   const {
     id,
     title,
@@ -69,8 +85,10 @@ const ProductCard = ({ laptop }: ProductCardProps) => {
             size="sm" 
             variant="secondary" 
             className="w-8 h-8 p-0 glass-button"
+            onClick={handleToggleWishlist}
+            disabled={!user}
           >
-            <Heart className="w-4 h-4" />
+            <Heart className={`w-4 h-4 ${isInWishlist(laptop.id) ? 'fill-current text-red-500' : ''}`} />
           </Button>
         </div>
 
@@ -79,9 +97,11 @@ const ProductCard = ({ laptop }: ProductCardProps) => {
           <Button 
             size="sm" 
             className="w-full gradient-primary hover:opacity-90 text-white font-medium"
+            onClick={handleAddToCart}
+            disabled={!inStock || !user}
           >
             <ShoppingCart className="w-4 h-4 mr-2" />
-            Add to Cart
+            {!user ? 'Sign in to buy' : !inStock ? 'Out of Stock' : 'Add to Cart'}
           </Button>
         </div>
       </div>
