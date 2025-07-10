@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Search, Filter, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,7 +6,28 @@ import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import ProductCard from "@/components/ProductCard";
-import { laptops, categories, priceRanges } from "@/data/laptops";
+import { supabase } from "@/integrations/supabase/client";
+import type { Database } from "@/integrations/supabase/types";
+
+type Laptop = Database['public']['Tables']['laptops']['Row'] & {
+  specs: {
+    processor: string;
+    ram: string;
+    storage: string;
+    display: string;
+    graphics: string;
+    battery: string;
+    weight: string;
+    os: string;
+  };
+  shortDescription: string;
+  isNew: boolean;
+  isFeatured: boolean;
+  isTrending: boolean;
+  reviewCount: number;
+  inStock: boolean;
+  originalPrice?: number;
+};
 
 const LaptopListingPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -15,9 +36,57 @@ const LaptopListingPage = () => {
   const [priceRange, setPriceRange] = useState([0, 3000]);
   const [sortBy, setSortBy] = useState("featured");
   const [showFilters, setShowFilters] = useState(false);
+  const [laptops, setLaptops] = useState<Laptop[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // Get unique brands
+  // Fetch laptops from database
+  useEffect(() => {
+    const fetchLaptops = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('laptops')
+          .select('*');
+        
+        if (error) throw error;
+        
+        // Transform database data to include missing properties
+        const transformedData: Laptop[] = data.map(laptop => ({
+          ...laptop,
+          price: Number(laptop.price),
+          rating: Number(laptop.rating),
+          specs: {
+            processor: laptop.processor,
+            ram: laptop.ram,
+            storage: laptop.storage,
+            display: laptop.display,
+            graphics: laptop.graphics,
+            battery: laptop.battery,
+            weight: laptop.weight,
+            os: laptop.os
+          },
+          shortDescription: laptop.short_description || '',
+          isNew: laptop.is_new || false,
+          isFeatured: laptop.is_featured || false,
+          isTrending: laptop.is_trending || false,
+          reviewCount: laptop.review_count || 0,
+          inStock: laptop.in_stock,
+          originalPrice: laptop.original_price ? Number(laptop.original_price) : undefined
+        }));
+        
+        setLaptops(transformedData);
+      } catch (error) {
+        console.error('Error fetching laptops:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLaptops();
+  }, []);
+
+  // Get unique brands and categories
   const brands = Array.from(new Set(laptops.map(laptop => laptop.brand))).sort();
+  const categories = ["All", ...Array.from(new Set(laptops.map(laptop => laptop.category))).sort()];
 
   // Filter and sort laptops
   const filteredLaptops = useMemo(() => {
@@ -41,21 +110,21 @@ const LaptopListingPage = () => {
       }
 
       // Price range
-      if (laptop.price < priceRange[0] || laptop.price > priceRange[1]) {
+      if (Number(laptop.price) < priceRange[0] || Number(laptop.price) > priceRange[1]) {
         return false;
       }
 
       return true;
     });
 
-    // Sort
+      // Sort
     switch (sortBy) {
       case "price-low":
-        return filtered.sort((a, b) => a.price - b.price);
+        return filtered.sort((a, b) => Number(a.price) - Number(b.price));
       case "price-high":
-        return filtered.sort((a, b) => b.price - a.price);
+        return filtered.sort((a, b) => Number(b.price) - Number(a.price));
       case "rating":
-        return filtered.sort((a, b) => b.rating - a.rating);
+        return filtered.sort((a, b) => Number(b.rating) - Number(a.rating));
       case "newest":
         return filtered.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
       case "featured":
@@ -241,17 +310,38 @@ const LaptopListingPage = () => {
                 <div>
                   <h4 className="font-semibold mb-4">Quick Filters</h4>
                   <div className="flex flex-wrap gap-2">
-                    {priceRanges.map((range) => (
-                      <Button
-                        key={range.label}
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setPriceRange([range.min, range.max === Infinity ? 3000 : range.max])}
-                        className="text-xs glass-button"
-                      >
-                        {range.label}
-                      </Button>
-                    ))}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setPriceRange([0, 999])}
+                      className="text-xs glass-button"
+                    >
+                      Under $1,000
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setPriceRange([1000, 1499])}
+                      className="text-xs glass-button"
+                    >
+                      $1,000 - $1,500
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setPriceRange([1500, 1999])}
+                      className="text-xs glass-button"
+                    >
+                      $1,500 - $2,000
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setPriceRange([2000, 3000])}
+                      className="text-xs glass-button"
+                    >
+                      Over $2,000
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -303,7 +393,12 @@ const LaptopListingPage = () => {
             </div>
 
             {/* Products Grid */}
-            {filteredLaptops.length > 0 ? (
+            {loading ? (
+              <div className="text-center py-16">
+                <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <p className="text-muted-foreground">Loading laptops...</p>
+              </div>
+            ) : filteredLaptops.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {filteredLaptops.map((laptop) => (
                   <ProductCard key={laptop.id} laptop={laptop} />
