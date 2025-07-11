@@ -404,11 +404,17 @@ const LaptopListingPage = () => {
                 <p className="text-muted-foreground">Loading laptops...</p>
               </div>
             ) : filteredLaptops.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {filteredLaptops.map((laptop) => (
-                  <ProductCard key={laptop.id} laptop={laptop} />
-                ))}
-              </div>
+              (() => {
+                console.log('LaptopListingPage: Rendering products grid with', filteredLaptops.length, 'laptops');
+                return (
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    {filteredLaptops.map((laptop) => (
+                      <ProductCard key={laptop.id} laptop={laptop} />
+                    ))}
+                  </div>
+                );
+              })()
+              
             ) : (
               <div className="text-center py-16">
                 <div className="w-32 h-32 gradient-primary rounded-full flex items-center justify-center mx-auto mb-6 opacity-20">

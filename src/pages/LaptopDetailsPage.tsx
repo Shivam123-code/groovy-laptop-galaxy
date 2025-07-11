@@ -1,19 +1,137 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Heart, ShoppingCart, Star, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProductCard from "@/components/ProductCard";
-import { laptops } from "@/data/laptops";
+import { supabase } from "@/integrations/supabase/client";
+import type { Database } from "@/integrations/supabase/types";
+
+type Laptop = Database['public']['Tables']['laptops']['Row'] & {
+  specs: {
+    processor: string;
+    ram: string;
+    storage: string;
+    display: string;
+    graphics: string;
+    battery: string;
+    weight: string;
+    os: string;
+  };
+  shortDescription: string;
+  isNew: boolean;
+  isFeatured: boolean;
+  isTrending: boolean;
+  reviewCount: number;
+  inStock: boolean;
+  originalPrice?: number;
+};
 
 const LaptopDetailsPage = () => {
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [laptop, setLaptop] = useState<Laptop | null>(null);
+  const [relatedLaptops, setRelatedLaptops] = useState<Laptop[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const laptop = laptops.find(l => l.id === id);
-  
+  useEffect(() => {
+    const fetchLaptop = async () => {
+      try {
+        // Fetch the specific laptop
+        const { data: laptopData, error: laptopError } = await supabase
+          .from('laptops')
+          .select('*')
+          .eq('id', id)
+          .single();
+
+        if (laptopError) throw laptopError;
+
+        // Transform the laptop data
+        const transformedLaptop: Laptop = {
+          ...laptopData,
+          price: Number(laptopData.price),
+          rating: Number(laptopData.rating),
+          specs: {
+            processor: laptopData.processor,
+            ram: laptopData.ram,
+            storage: laptopData.storage,
+            display: laptopData.display,
+            graphics: laptopData.graphics,
+            battery: laptopData.battery,
+            weight: laptopData.weight,
+            os: laptopData.os
+          },
+          shortDescription: laptopData.short_description || '',
+          isNew: laptopData.is_new || false,
+          isFeatured: laptopData.is_featured || false,
+          isTrending: laptopData.is_trending || false,
+          reviewCount: laptopData.review_count || 0,
+          inStock: laptopData.in_stock,
+          originalPrice: laptopData.original_price ? Number(laptopData.original_price) : undefined
+        };
+
+        setLaptop(transformedLaptop);
+
+        // Fetch related laptops
+        const { data: relatedData, error: relatedError } = await supabase
+          .from('laptops')
+          .select('*')
+          .neq('id', id)
+          .or(`brand.eq.${transformedLaptop.brand},category.eq.${transformedLaptop.category}`)
+          .limit(4);
+
+        if (relatedError) throw relatedError;
+
+        // Transform related laptops data
+        const transformedRelated: Laptop[] = relatedData.map(laptop => ({
+          ...laptop,
+          price: Number(laptop.price),
+          rating: Number(laptop.rating),
+          specs: {
+            processor: laptop.processor,
+            ram: laptop.ram,
+            storage: laptop.storage,
+            display: laptop.display,
+            graphics: laptop.graphics,
+            battery: laptop.battery,
+            weight: laptop.weight,
+            os: laptop.os
+          },
+          shortDescription: laptop.short_description || '',
+          isNew: laptop.is_new || false,
+          isFeatured: laptop.is_featured || false,
+          isTrending: laptop.is_trending || false,
+          reviewCount: laptop.review_count || 0,
+          inStock: laptop.in_stock,
+          originalPrice: laptop.original_price ? Number(laptop.original_price) : undefined
+        }));
+
+        setRelatedLaptops(transformedRelated);
+      } catch (error) {
+        console.error('Error fetching laptop:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) {
+      fetchLaptop();
+    }
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading laptop details...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!laptop) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -29,10 +147,6 @@ const LaptopDetailsPage = () => {
       </div>
     );
   }
-
-  const relatedLaptops = laptops
-    .filter(l => l.id !== laptop.id && (l.brand === laptop.brand || l.category === laptop.category))
-    .slice(0, 4);
 
   const discountPercentage = laptop.originalPrice 
     ? Math.round(((laptop.originalPrice - laptop.price) / laptop.originalPrice) * 100)

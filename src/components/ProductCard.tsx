@@ -2,10 +2,30 @@ import { Link } from "react-router-dom";
 import { Heart, ShoppingCart, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Laptop } from "@/data/laptops";
 import { useCart } from "@/hooks/useCart";
 import { useWishlist } from "@/hooks/useWishlist";
 import { useAuth } from "@/contexts/AuthContext";
+import type { Database } from "@/integrations/supabase/types";
+
+type Laptop = Database['public']['Tables']['laptops']['Row'] & {
+  specs: {
+    processor: string;
+    ram: string;
+    storage: string;
+    display: string;
+    graphics: string;
+    battery: string;
+    weight: string;
+    os: string;
+  };
+  shortDescription: string;
+  isNew: boolean;
+  isFeatured: boolean;
+  isTrending: boolean;
+  reviewCount: number;
+  inStock: boolean;
+  originalPrice?: number;
+};
 
 interface ProductCardProps {
   laptop: Laptop;
@@ -15,6 +35,8 @@ const ProductCard = ({ laptop }: ProductCardProps) => {
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
   const { user } = useAuth();
+
+  console.log('ProductCard rendering laptop:', laptop?.title, laptop?.id);
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
