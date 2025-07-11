@@ -33,7 +33,7 @@ const LaptopListingPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
-  const [priceRange, setPriceRange] = useState([0, 3000]);
+  const [priceRange, setPriceRange] = useState([0, 100000]);
   const [sortBy, setSortBy] = useState("featured");
   const [showFilters, setShowFilters] = useState(false);
   const [laptops, setLaptops] = useState<Laptop[]>([]);
@@ -162,12 +162,12 @@ const LaptopListingPage = () => {
     setSearchQuery("");
     setSelectedCategories([]);
     setSelectedBrands([]);
-    setPriceRange([0, 3000]);
+    setPriceRange([0, 100000]);
     setSortBy("featured");
   };
 
   const activeFiltersCount = selectedCategories.length + selectedBrands.length + 
-    (priceRange[0] > 0 || priceRange[1] < 3000 ? 1 : 0);
+    (priceRange[0] > 0 || priceRange[1] < 100000 ? 1 : 0);
 
   return (
     <div className="min-h-screen bg-background">
@@ -299,9 +299,9 @@ const LaptopListingPage = () => {
                     <Slider
                       value={priceRange}
                       onValueChange={setPriceRange}
-                      max={3000}
+                      max={100000}
                       min={0}
-                      step={100}
+                      step={1000}
                       className="mb-4"
                     />
                     <div className="flex items-center justify-between text-sm text-muted-foreground">
@@ -342,7 +342,7 @@ const LaptopListingPage = () => {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => setPriceRange([2000, 3000])}
+                      onClick={() => setPriceRange([2000, 100000])}
                       className="text-xs glass-button"
                     >
                       Over $2,000
@@ -384,11 +384,11 @@ const LaptopListingPage = () => {
                       {brand} <X className="w-3 h-3 ml-1" />
                     </Badge>
                   ))}
-                  {(priceRange[0] > 0 || priceRange[1] < 3000) && (
+                  {(priceRange[0] > 0 || priceRange[1] < 100000) && (
                     <Badge 
                       variant="secondary" 
                       className="cursor-pointer"
-                      onClick={() => setPriceRange([0, 3000])}
+                      onClick={() => setPriceRange([0, 100000])}
                     >
                       ${priceRange[0]}-${priceRange[1]} <X className="w-3 h-3 ml-1" />
                     </Badge>
