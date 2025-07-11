@@ -36,9 +36,12 @@ const HomePage = () => {
   useEffect(() => {
     const fetchLaptops = async () => {
       try {
+        console.log('HomePage: Attempting to fetch laptops...');
         const { data, error } = await supabase
           .from('laptops')
           .select('*');
+        
+        console.log('HomePage: Fetch result - data:', data, 'error:', error);
         
         if (error) throw error;
         
@@ -67,10 +70,12 @@ const HomePage = () => {
         }));
         
         setLaptops(transformedData);
+        console.log('HomePage: Successfully transformed and set laptops:', transformedData.length, 'items');
       } catch (error) {
-        console.error('Error fetching laptops:', error);
+        console.error('HomePage: Error fetching laptops:', error);
       } finally {
         setLoading(false);
+        console.log('HomePage: Loading finished');
       }
     };
 
