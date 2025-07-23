@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Phone, Mail, Clock, MessageCircle, Headphones } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, MessageCircle, Headphones, Facebook, Instagram } from "lucide-react";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -18,16 +18,16 @@ const ContactPage = () => {
       icon: MapPin,
       title: "Visit Our Store",
       details: [
-        "123 Tech Avenue",
-        "Silicon Valley, CA 94025",
-        "United States"
+        "Dak Banglow Chauraha, Grand Plaza",
+        "Patna 800001",
+        "India"
       ]
     },
     {
       icon: Phone,
       title: "Call Us",
       details: [
-        "WhatsApp & call: +91 6201743052"
+        "Mob - 7707000725"
       ]
     },
     {
@@ -44,6 +44,14 @@ const ContactPage = () => {
         "Monday - Friday: 9AM - 8PM",
         "Saturday: 10AM - 6PM", 
         "Sunday: 12PM - 5PM"
+      ]
+    },
+    {
+      icon: Facebook,
+      title: "Follow Us",
+      details: [
+        "Facebook: Lappydekho 2.0",
+        "Instagram: Lappydekho 2.0"
       ]
     }
   ];

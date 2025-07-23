@@ -48,7 +48,7 @@ const Header = () => {
               <span className="text-white font-bold text-lg">L</span>
             </div>
             <span className="font-space-grotesk font-bold text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Lovable Laptops
+              LappyDekho 2.0
             </span>
           </Link>
 
