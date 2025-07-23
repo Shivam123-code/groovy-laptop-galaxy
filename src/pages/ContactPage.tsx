@@ -27,18 +27,14 @@ const ContactPage = () => {
       icon: Phone,
       title: "Call Us",
       details: [
-        "+1 (555) 123-4567",
-        "Toll-free: 1-800-LAPTOPS",
-        "WhatsApp: +1 (555) 987-6543"
+        "WhatsApp & call: +91 6201743052"
       ]
     },
     {
       icon: Mail,
       title: "Email Us",
       details: [
-        "hello@lovablelaptops.com",  
-        "support@lovablelaptops.com",
-        "sales@lovablelaptops.com"
+        "badshahsinghvivek@gmail.com"
       ]
     },
     {
