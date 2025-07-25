@@ -8,6 +8,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Badge } from '@/components/ui/badge';
 import { X, Plus } from 'lucide-react';
 import { Tables, TablesInsert } from '@/integrations/supabase/types';
+import ImageUpload from './ImageUpload';
 
 type Product = Tables<'laptops'>;
 
@@ -100,6 +101,13 @@ const ProductForm: React.FC<ProductFormProps> = ({ product, onSubmit, onCancel }
     setFormData(prev => ({
       ...prev,
       [field]: prev[field].filter((_, i) => i !== index)
+    }));
+  };
+
+  const handleImageUploaded = (imageUrl: string) => {
+    setFormData(prev => ({
+      ...prev,
+      images: [...prev.images.filter(img => img.trim() !== ''), imageUrl]
     }));
   };
 
@@ -316,35 +324,42 @@ const ProductForm: React.FC<ProductFormProps> = ({ product, onSubmit, onCancel }
           <CardTitle>Product Images</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-3">
-            {formData.images.map((image, index) => (
-              <div key={index} className="flex gap-2">
-                <Input
-                  placeholder="Image URL"
-                  value={image}
-                  onChange={(e) => handleArrayChange('images', index, e.target.value)}
-                />
-                {formData.images.length > 1 && (
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="icon"
-                    onClick={() => removeArrayField('images', index)}
-                  >
-                    <X className="w-4 h-4" />
-                  </Button>
-                )}
-              </div>
-            ))}
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => addArrayField('images')}
-              className="flex items-center gap-2"
-            >
-              <Plus className="w-4 h-4" />
-              Add Image
-            </Button>
+          <div className="space-y-4">
+            {/* Image Upload Component */}
+            <ImageUpload onImageUploaded={handleImageUploaded} />
+            
+            {/* Existing Image URLs */}
+            <div className="space-y-3">
+              <h4 className="text-sm font-medium">Current Images</h4>
+              {formData.images.map((image, index) => (
+                <div key={index} className="flex gap-2">
+                  <Input
+                    placeholder="Image URL"
+                    value={image}
+                    onChange={(e) => handleArrayChange('images', index, e.target.value)}
+                  />
+                  {formData.images.length > 1 && (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      onClick={() => removeArrayField('images', index)}
+                    >
+                      <X className="w-4 h-4" />
+                    </Button>
+                  )}
+                </div>
+              ))}
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => addArrayField('images')}
+                className="flex items-center gap-2"
+              >
+                <Plus className="w-4 h-4" />
+                Add Image URL
+              </Button>
+            </div>
           </div>
         </CardContent>
       </Card>

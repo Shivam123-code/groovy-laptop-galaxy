@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import Header from "./components/Header";
+import WhatsAppButton from "./components/WhatsAppButton";
 import HomePage from "./pages/HomePage";
 import LaptopListingPage from "./pages/LaptopListingPage";
 import LaptopDetailsPage from "./pages/LaptopDetailsPage";
@@ -26,6 +27,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Header />
+          <WhatsAppButton />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/laptops" element={<LaptopListingPage />} />
