@@ -14,14 +14,14 @@
     --surface: 240 8% 6%;
     --surface-light: 240 6% 10%;
 
-    /* Brand Colors - Electric & Vibrant */
-    --primary: 280 100% 70%;
+    /* Brand Colors - New Theme */
+    --primary: 195 75% 61%;
     --primary-foreground: 0 0% 98%;
-    --primary-glow: 280 100% 85%;
+    --primary-glow: 195 75% 75%;
     
-    --secondary: 195 100% 65%;
+    --secondary: 60 100% 97%;
     --secondary-foreground: 240 10% 3.9%;
-    --secondary-glow: 195 100% 80%;
+    --secondary-glow: 60 100% 90%;
     
     --accent: 315 100% 65%;
     --accent-foreground: 0 0% 98%;
@@ -51,17 +51,17 @@
     --radius: 1rem;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(280 100% 70%), hsl(315 100% 65%));
-    --gradient-secondary: linear-gradient(135deg, hsl(195 100% 65%), hsl(280 100% 70%));
-    --gradient-hero: linear-gradient(135deg, hsl(240 10% 3.9%) 0%, hsl(280 100% 70% / 0.1) 50%, hsl(195 100% 65% / 0.1) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(195 75% 61%), hsl(315 100% 65%));
+    --gradient-secondary: linear-gradient(135deg, hsl(60 100% 97%), hsl(195 75% 61%));
+    --gradient-hero: linear-gradient(135deg, hsl(240 10% 3.9%) 0%, hsl(195 75% 61% / 0.1) 50%, hsl(60 100% 97% / 0.1) 100%);
     --gradient-card: linear-gradient(135deg, hsl(240 8% 6%) 0%, hsl(240 6% 10%) 100%);
-    --gradient-glow: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), hsl(280 100% 70% / 0.1), transparent 40%);
+    --gradient-glow: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), hsl(195 75% 61% / 0.1), transparent 40%);
 
     /* Shadows & Effects */
-    --shadow-primary: 0 20px 40px -12px hsl(280 100% 70% / 0.3);
-    --shadow-secondary: 0 20px 40px -12px hsl(195 100% 65% / 0.3);
+    --shadow-primary: 0 20px 40px -12px hsl(195 75% 61% / 0.3);
+    --shadow-secondary: 0 20px 40px -12px hsl(60 100% 97% / 0.3);
     --shadow-card: 0 8px 32px -4px hsl(240 10% 3.9% / 0.8);
-    --shadow-glow: 0 0 60px hsl(280 100% 70% / 0.4);
+    --shadow-glow: 0 0 60px hsl(195 75% 61% / 0.4);
     
     /* Animations */
     --transition-smooth: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
@@ -203,8 +203,8 @@
 }
 
 @keyframes glow {
-  from { box-shadow: 0 0 20px hsl(280 100% 70% / 0.4); }
-  to { box-shadow: 0 0 40px hsl(280 100% 70% / 0.8); }
+  from { box-shadow: 0 0 20px hsl(195 75% 61% / 0.4); }
+  to { box-shadow: 0 0 40px hsl(195 75% 61% / 0.8); }
 }
 
 @keyframes slideUp {

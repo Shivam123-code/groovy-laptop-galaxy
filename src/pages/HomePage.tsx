@@ -87,7 +87,7 @@ const HomePage = () => {
       title: laptops.find(l => l.isFeatured)?.title || "Premium Laptops",
       subtitle: "Unleash Your Creative Potential",
       description: "Experience ultimate performance with cutting-edge technology",
-      image: laptops.find(l => l.isFeatured)?.images?.[0] || "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&h=600&fit=crop",
+      image: laptops.find(l => l.isFeatured)?.images?.[0] || "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=1200&h=600&fit=crop",
       cta: "Shop Now",
       laptop: laptops.find(l => l.isFeatured) || laptops[0]
     },
@@ -95,7 +95,7 @@ const HomePage = () => {
       title: "Gaming Excellence",
       subtitle: "Performance Unleashed",
       description: "High-refresh displays and powerful graphics for the ultimate gaming experience",
-      image: laptops.find(l => l.category === "Gaming")?.images?.[0] || "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=1200&h=600&fit=crop",
+      image: laptops.find(l => l.category === "Gaming")?.images?.[0] || "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=1200&h=600&fit=crop",
       cta: "Level Up",
       laptop: laptops.find(l => l.category === "Gaming") || laptops[1]
     },
@@ -103,9 +103,89 @@ const HomePage = () => {
       title: "Business Excellence",
       subtitle: "Professional Grade",
       description: "Enterprise-level security and reliability for professional success",
-      image: laptops.find(l => l.category === "Business")?.images?.[0] || "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=1200&h=600&fit=crop",
+      image: laptops.find(l => l.category === "Business")?.images?.[0] || "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&h=600&fit=crop",
       cta: "Explore",
       laptop: laptops.find(l => l.category === "Business") || laptops[2]
+    },
+    {
+      title: "Coding & Development",
+      subtitle: "Developer's Choice",
+      description: "Powerful machines built for coding, compilation, and development workflows",
+      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=600&fit=crop",
+      cta: "Code Now",
+      laptop: laptops.find(l => l.category === "Programming") || laptops[3]
+    },
+    {
+      title: "Creative Workstation",
+      subtitle: "For Creators",
+      description: "High-performance laptops designed for video editing, design, and creative work",
+      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&h=600&fit=crop",
+      cta: "Create",
+      laptop: laptops.find(l => l.category === "Creative") || laptops[4]
+    },
+    {
+      title: "Ultra-Portable",
+      subtitle: "Work Anywhere",
+      description: "Lightweight and powerful laptops for professionals on the go",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&h=600&fit=crop",
+      cta: "Go Mobile",
+      laptop: laptops.find(l => l.category === "Ultrabook") || laptops[5]
+    },
+    {
+      title: "AI & Machine Learning",
+      subtitle: "Future Ready",
+      description: "High-performance machines optimized for AI development and data processing",
+      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=600&fit=crop",
+      cta: "Innovate",
+      laptop: laptops[6] || laptops[0]
+    },
+    {
+      title: "Tech Innovation",
+      subtitle: "Next Generation",
+      description: "Experience the future of computing with cutting-edge technology",
+      image: "https://images.unsplash.com/photo-1526374965328-7f61d46190af?w=1200&h=600&fit=crop",
+      cta: "Discover",
+      laptop: laptops[7] || laptops[0]
+    },
+    {
+      title: "Premium Collection",
+      subtitle: "Luxury Performance",
+      description: "Top-tier laptops for those who demand the best in performance and design",
+      image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1200&h=600&fit=crop",
+      cta: "Explore Premium",
+      laptop: laptops[8] || laptops[0]
+    },
+    {
+      title: "Developer Tools",
+      subtitle: "Code in Style",
+      description: "Powerful development environments with colorful displays and fast performance",
+      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=1200&h=600&fit=crop",
+      cta: "Start Coding",
+      laptop: laptops[9] || laptops[0]
+    },
+    {
+      title: "Student Special",
+      subtitle: "Learn & Grow",
+      description: "Affordable yet powerful laptops perfect for students and educational needs",
+      image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&h=600&fit=crop",
+      cta: "Study Smart",
+      laptop: laptops[10] || laptops[0]
+    },
+    {
+      title: "Gaming Beast",
+      subtitle: "Ultimate Gaming",
+      description: "High-end gaming laptops with top-tier graphics and lightning-fast performance",
+      image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=1200&h=600&fit=crop",
+      cta: "Game On",
+      laptop: laptops[11] || laptops[0]
+    },
+    {
+      title: "Professional Suite",
+      subtitle: "Business Ready",
+      description: "Enterprise-grade laptops with advanced security and professional features",
+      image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=1200&h=600&fit=crop",
+      cta: "Work Pro",
+      laptop: laptops[12] || laptops[0]
     }
   ] : [];
 

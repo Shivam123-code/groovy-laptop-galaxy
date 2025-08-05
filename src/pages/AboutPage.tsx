@@ -231,7 +231,15 @@ const AboutPage = () => {
               Browse Laptops
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
-            <Button size="lg" variant="outline" className="glass-button border-white/20 text-white hover:bg-white/10 px-8">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="glass-button border-white/20 text-white hover:bg-white/10 px-8"
+              onClick={() => {
+                const whatsappUrl = `https://wa.me/7707000725?text=${encodeURIComponent("Hi! I'd like to know more about your laptop products. Could you help me?")}`;
+                window.open(whatsappUrl, '_blank');
+              }}
+            >
               Contact Us
             </Button>
           </div>
