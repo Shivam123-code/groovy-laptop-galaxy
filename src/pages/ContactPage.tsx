@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Phone, Mail, Clock, MessageCircle, Headphones, Facebook, Instagram } from "lucide-react";
+import whatsappLogo from "@/assets/whatsapp-logo.svg";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -34,16 +35,14 @@ const ContactPage = () => {
       icon: Mail,
       title: "Email Us",
       details: [
-        "badshahsinghvivek@gmail.com"
+        "lappydekho@gmail.com"
       ]
     },
     {
       icon: Clock,
       title: "Business Hours",
       details: [
-        "Monday - Friday: 9AM - 8PM",
-        "Saturday: 10AM - 6PM", 
-        "Sunday: 12PM - 5PM"
+        "10 AM to 9 PM all day open"
       ]
     },
     {
@@ -62,21 +61,32 @@ const ContactPage = () => {
       title: "Live Chat",
       description: "Get instant help from our tech experts",
       action: "Start Chat",
-      gradient: "gradient-primary"
+      gradient: "gradient-primary",
+      onClick: () => {
+        const whatsappUrl = `https://wa.me/7707000725?text=${encodeURIComponent("Hi! I need help with laptop products. Could you assist me?")}`;
+        window.open(whatsappUrl, '_blank');
+      },
+      customIcon: whatsappLogo
     },
     {
-      icon: Headphones,
+      icon: Phone,
       title: "Phone Support",
       description: "Speak directly with our support team",
       action: "Call Now",
-      gradient: "gradient-secondary"
+      gradient: "gradient-secondary",
+      onClick: () => {
+        window.open('tel:7707000725');
+      }
     },
     {
       icon: Mail,
       title: "Email Support",
       description: "Send us your questions anytime",
       action: "Send Email",
-      gradient: "bg-electric"
+      gradient: "bg-electric",
+      onClick: () => {
+        window.open('mailto:lappydekho@gmail.com');
+      }
     }
   ];
 
@@ -132,7 +142,11 @@ const ContactPage = () => {
             {supportOptions.map((option, index) => (
               <div key={index} className="glass-card p-8 rounded-2xl text-center glow-hover">
                 <div className={`w-16 h-16 ${option.gradient} rounded-2xl flex items-center justify-center mx-auto mb-6`}>
-                  <option.icon className="w-8 h-8 text-white" />
+                  {option.customIcon ? (
+                    <img src={option.customIcon} alt={option.title} className="w-8 h-8" />
+                  ) : (
+                    <option.icon className="w-8 h-8 text-white" />
+                  )}
                 </div>
                 <h3 className="text-xl font-bold font-space-grotesk mb-3">
                   {option.title}
@@ -140,7 +154,10 @@ const ContactPage = () => {
                 <p className="text-muted-foreground mb-6">
                   {option.description}
                 </p>
-                <Button className="w-full gradient-primary hover:opacity-90 text-white font-semibold">
+                <Button 
+                  onClick={option.onClick}
+                  className="w-full gradient-primary hover:opacity-90 text-white font-semibold"
+                >
                   {option.action}
                 </Button>
               </div>
