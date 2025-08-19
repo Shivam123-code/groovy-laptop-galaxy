@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,60 +8,60 @@
 
 @layer base {
   :root {
-    /* Background & Base Colors */
-    --background: 48 100% 96%;
-    --foreground: 215 25% 15%;
-    --surface: 48 100% 98%;
-    --surface-light: 45 96% 94%;
+    /* Background & Base Colors - Clean Modern Theme */
+    --background: 210 40% 98%;
+    --foreground: 222 24% 12%;
+    --surface: 210 40% 99%;
+    --surface-light: 210 40% 96%;
 
-    /* Brand Colors - Vibrant Modern Theme */
-    --primary: 252 56% 64%;
-    --primary-foreground: 48 100% 96%;
-    --primary-glow: 252 56% 75%;
+    /* Brand Colors - Professional Blue & Teal */
+    --primary: 210 100% 56%;
+    --primary-foreground: 210 40% 98%;
+    --primary-glow: 210 100% 70%;
     
-    --secondary: 45 96% 89%;
-    --secondary-foreground: 215 25% 15%;
-    --secondary-glow: 45 96% 94%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 24% 12%;
+    --secondary-glow: 210 40% 93%;
     
-    --accent: 0 76% 71%;
-    --accent-foreground: 48 100% 96%;
-    --accent-glow: 0 76% 80%;
+    --accent: 180 100% 45%;
+    --accent-foreground: 210 40% 98%;
+    --accent-glow: 180 100% 60%;
     
-    --electric: 293 69% 49%;
-    --electric-foreground: 48 100% 96%;
+    --electric: 160 84% 39%;
+    --electric-foreground: 210 40% 98%;
 
     /* UI Colors */
-    --card: 48 100% 98%;
-    --card-foreground: 215 25% 15%;
-    --card-border: 220 13% 88%;
+    --card: 210 40% 99%;
+    --card-foreground: 222 24% 12%;
+    --card-border: 210 40% 90%;
     
-    --popover: 48 100% 98%;
-    --popover-foreground: 215 25% 15%;
+    --popover: 210 40% 99%;
+    --popover-foreground: 222 24% 12%;
     
-    --muted: 210 20% 94%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 210 40% 93%;
+    --muted-foreground: 222 13% 50%;
     
     --destructive: 0 85% 60%;
-    --destructive-foreground: 48 100% 96%;
+    --destructive-foreground: 210 40% 98%;
     
-    --border: 220 13% 88%;
-    --input: 210 20% 94%;
-    --ring: 252 56% 64%;
+    --border: 210 40% 90%;
+    --input: 210 40% 93%;
+    --ring: 210 100% 56%;
     
-    --radius: 1rem;
+    --radius: 0.75rem;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(252 56% 64%), hsl(293 69% 49%));
-    --gradient-secondary: linear-gradient(135deg, hsl(45 96% 89%), hsl(252 56% 64%));
-    --gradient-hero: linear-gradient(135deg, hsl(48 100% 96%) 0%, hsl(252 56% 64% / 0.1) 50%, hsl(0 76% 71% / 0.1) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(48 100% 98%) 0%, hsl(45 96% 94%) 100%);
-    --gradient-glow: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), hsl(252 56% 64% / 0.15), transparent 40%);
+    --gradient-primary: linear-gradient(135deg, hsl(210 100% 56%), hsl(180 100% 45%));
+    --gradient-secondary: linear-gradient(135deg, hsl(210 40% 96%), hsl(210 100% 56%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 40% 98%) 0%, hsl(210 100% 56% / 0.08) 50%, hsl(180 100% 45% / 0.05) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(210 40% 99%) 0%, hsl(210 40% 96%) 100%);
+    --gradient-glow: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), hsl(210 100% 56% / 0.1), transparent 40%);
 
     /* Shadows & Effects */
-    --shadow-primary: 0 20px 40px -12px hsl(252 56% 64% / 0.3);
-    --shadow-secondary: 0 20px 40px -12px hsl(0 76% 71% / 0.3);
-    --shadow-card: 0 8px 32px -4px hsl(220 13% 88% / 0.4);
-    --shadow-glow: 0 0 60px hsl(252 56% 64% / 0.4);
+    --shadow-primary: 0 10px 25px -5px hsl(210 100% 56% / 0.25);
+    --shadow-secondary: 0 10px 25px -5px hsl(180 100% 45% / 0.25);
+    --shadow-card: 0 4px 20px -2px hsl(210 40% 90% / 0.6);
+    --shadow-glow: 0 0 40px hsl(210 100% 56% / 0.3);
     
     /* Animations */
     --transition-smooth: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
@@ -130,7 +130,31 @@
   }
 
   body {
-    @apply bg-background text-foreground font-inter;
+    @apply bg-background text-foreground;
+    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+
+  /* Enhanced Typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .font-heading {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
   }
 }
 
