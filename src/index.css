@@ -9,59 +9,59 @@
 @layer base {
   :root {
     /* Background & Base Colors */
-    --background: 60 100% 97%;
-    --foreground: 195 58% 20%;
-    --surface: 60 100% 99%;
-    --surface-light: 60 100% 95%;
+    --background: 48 100% 96%;
+    --foreground: 215 25% 15%;
+    --surface: 48 100% 98%;
+    --surface-light: 45 96% 94%;
 
-    /* Brand Colors - New Theme */
-    --primary: 195 58% 60%;
-    --primary-foreground: 60 100% 97%;
-    --primary-glow: 195 58% 75%;
+    /* Brand Colors - Vibrant Modern Theme */
+    --primary: 252 56% 64%;
+    --primary-foreground: 48 100% 96%;
+    --primary-glow: 252 56% 75%;
     
-    --secondary: 60 100% 97%;
-    --secondary-foreground: 195 58% 20%;
-    --secondary-glow: 60 100% 90%;
+    --secondary: 45 96% 89%;
+    --secondary-foreground: 215 25% 15%;
+    --secondary-glow: 45 96% 94%;
     
-    --accent: 195 58% 45%;
-    --accent-foreground: 60 100% 97%;
-    --accent-glow: 195 58% 65%;
+    --accent: 0 76% 71%;
+    --accent-foreground: 48 100% 96%;
+    --accent-glow: 0 76% 80%;
     
-    --electric: 195 58% 50%;
-    --electric-foreground: 60 100% 97%;
+    --electric: 293 69% 49%;
+    --electric-foreground: 48 100% 96%;
 
     /* UI Colors */
-    --card: 60 100% 99%;
-    --card-foreground: 195 58% 20%;
-    --card-border: 195 20% 85%;
+    --card: 48 100% 98%;
+    --card-foreground: 215 25% 15%;
+    --card-border: 220 13% 88%;
     
-    --popover: 60 100% 99%;
-    --popover-foreground: 195 58% 20%;
+    --popover: 48 100% 98%;
+    --popover-foreground: 215 25% 15%;
     
-    --muted: 60 30% 92%;
-    --muted-foreground: 195 30% 45%;
+    --muted: 210 20% 94%;
+    --muted-foreground: 215 16% 47%;
     
     --destructive: 0 85% 60%;
-    --destructive-foreground: 60 100% 97%;
+    --destructive-foreground: 48 100% 96%;
     
-    --border: 195 20% 85%;
-    --input: 60 30% 95%;
-    --ring: 195 58% 60%;
+    --border: 220 13% 88%;
+    --input: 210 20% 94%;
+    --ring: 252 56% 64%;
     
     --radius: 1rem;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(195 58% 60%), hsl(195 58% 75%));
-    --gradient-secondary: linear-gradient(135deg, hsl(60 100% 97%), hsl(195 58% 60%));
-    --gradient-hero: linear-gradient(135deg, hsl(60 100% 97%) 0%, hsl(195 58% 60% / 0.2) 50%, hsl(60 100% 95% / 0.3) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(60 100% 99%) 0%, hsl(60 100% 95%) 100%);
-    --gradient-glow: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), hsl(195 58% 60% / 0.1), transparent 40%);
+    --gradient-primary: linear-gradient(135deg, hsl(252 56% 64%), hsl(293 69% 49%));
+    --gradient-secondary: linear-gradient(135deg, hsl(45 96% 89%), hsl(252 56% 64%));
+    --gradient-hero: linear-gradient(135deg, hsl(48 100% 96%) 0%, hsl(252 56% 64% / 0.1) 50%, hsl(0 76% 71% / 0.1) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(48 100% 98%) 0%, hsl(45 96% 94%) 100%);
+    --gradient-glow: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), hsl(252 56% 64% / 0.15), transparent 40%);
 
     /* Shadows & Effects */
-    --shadow-primary: 0 20px 40px -12px hsl(195 58% 60% / 0.3);
-    --shadow-secondary: 0 20px 40px -12px hsl(195 30% 70% / 0.3);
-    --shadow-card: 0 8px 32px -4px hsl(195 30% 85% / 0.3);
-    --shadow-glow: 0 0 60px hsl(195 58% 60% / 0.4);
+    --shadow-primary: 0 20px 40px -12px hsl(252 56% 64% / 0.3);
+    --shadow-secondary: 0 20px 40px -12px hsl(0 76% 71% / 0.3);
+    --shadow-card: 0 8px 32px -4px hsl(220 13% 88% / 0.4);
+    --shadow-glow: 0 0 60px hsl(252 56% 64% / 0.4);
     
     /* Animations */
     --transition-smooth: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
