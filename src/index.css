@@ -8,60 +8,36 @@
 
 @layer base {
   :root {
-    /* Background & Base Colors - Clean Modern Theme */
-    --background: 210 40% 98%;
-    --foreground: 222 24% 12%;
-    --surface: 210 40% 99%;
-    --surface-light: 210 40% 96%;
+    /* Default Theme - Clean and Simple */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
 
-    /* Brand Colors - Professional Blue & Teal */
-    --primary: 210 100% 56%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 221.2 83.2% 53.3%;
     --primary-foreground: 210 40% 98%;
-    --primary-glow: 210 100% 70%;
-    
+
     --secondary: 210 40% 96%;
-    --secondary-foreground: 222 24% 12%;
-    --secondary-glow: 210 40% 93%;
-    
-    --accent: 180 100% 45%;
-    --accent-foreground: 210 40% 98%;
-    --accent-glow: 180 100% 60%;
-    
-    --electric: 160 84% 39%;
-    --electric-foreground: 210 40% 98%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
-    /* UI Colors */
-    --card: 210 40% 99%;
-    --card-foreground: 222 24% 12%;
-    --card-border: 210 40% 90%;
-    
-    --popover: 210 40% 99%;
-    --popover-foreground: 222 24% 12%;
-    
-    --muted: 210 40% 93%;
-    --muted-foreground: 222 13% 50%;
-    
-    --destructive: 0 85% 60%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    
-    --border: 210 40% 90%;
-    --input: 210 40% 93%;
-    --ring: 210 100% 56%;
-    
-    --radius: 0.75rem;
 
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(210 100% 56%), hsl(180 100% 45%));
-    --gradient-secondary: linear-gradient(135deg, hsl(210 40% 96%), hsl(210 100% 56%));
-    --gradient-hero: linear-gradient(135deg, hsl(210 40% 98%) 0%, hsl(210 100% 56% / 0.08) 50%, hsl(180 100% 45% / 0.05) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(210 40% 99%) 0%, hsl(210 40% 96%) 100%);
-    --gradient-glow: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), hsl(210 100% 56% / 0.1), transparent 40%);
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
 
-    /* Shadows & Effects */
-    --shadow-primary: 0 10px 25px -5px hsl(210 100% 56% / 0.25);
-    --shadow-secondary: 0 10px 25px -5px hsl(180 100% 45% / 0.25);
-    --shadow-card: 0 4px 20px -2px hsl(210 40% 90% / 0.6);
-    --shadow-glow: 0 0 40px hsl(210 100% 56% / 0.3);
+    --radius: 0.5rem;
     
     /* Animations */
     --transition-smooth: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
