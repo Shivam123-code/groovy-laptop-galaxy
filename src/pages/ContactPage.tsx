@@ -61,7 +61,7 @@ const ContactPage = () => {
       title: "Live Chat",
       description: "Get instant help from our tech experts",
       action: "Start Chat",
-      gradient: "gradient-primary",
+      gradient: "bg-primary",
       onClick: () => {
         const whatsappUrl = `https://wa.me/7707000725?text=${encodeURIComponent("Hi! I need help with laptop products. Could you assist me?")}`;
         window.open(whatsappUrl, '_blank');
@@ -73,7 +73,7 @@ const ContactPage = () => {
       title: "Phone Support",
       description: "Speak directly with our support team",
       action: "Call Now",
-      gradient: "gradient-secondary",
+      gradient: "bg-secondary",
       onClick: () => {
         window.open('tel:7707000725');
       }
@@ -83,7 +83,7 @@ const ContactPage = () => {
       title: "Email Support",
       description: "Send us your questions anytime",
       action: "Send Email",
-      gradient: "bg-electric",
+      gradient: "bg-accent",
       onClick: () => {
         window.open('mailto:lappydekho@gmail.com');
       }
@@ -108,18 +108,18 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="gradient-hero py-20">
+      <section className="bg-muted py-20">
         <div className="container mx-auto px-4 text-center">
-          <Badge className="mb-6 gradient-primary text-white font-medium text-lg px-4 py-2">
+          <Badge className="mb-6 bg-primary text-primary-foreground font-medium text-lg px-4 py-2">
             Get in Touch
           </Badge>
-          <h1 className="text-4xl md:text-6xl font-bold font-space-grotesk mb-6 text-white">
+          <h1 className="text-4xl md:text-6xl font-bold font-heading mb-6 text-foreground">
             We're Here to
-            <span className="block bg-gradient-to-r from-primary-glow to-secondary-glow bg-clip-text text-transparent">
+            <span className="block text-primary">
               Help You
             </span>
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Have questions about laptops? Need technical support? Want to chat about the latest tech trends? 
             Our friendly team of experts is ready to assist you every step of the way.
           </p>
@@ -127,10 +127,10 @@ const ContactPage = () => {
       </section>
 
       {/* Quick Support Options */}
-      <section className="py-16 bg-surface">
+      <section className="py-16 bg-muted">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold font-space-grotesk mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4 text-foreground">
               Get Help Right Now
             </h2>
             <p className="text-lg text-muted-foreground">
@@ -148,7 +148,7 @@ const ContactPage = () => {
                     <option.icon className="w-8 h-8 text-white" />
                   )}
                 </div>
-                <h3 className="text-xl font-bold font-space-grotesk mb-3">
+                <h3 className="text-xl font-bold font-heading mb-3 text-foreground">
                   {option.title}
                 </h3>
                 <p className="text-muted-foreground mb-6">
@@ -156,7 +156,7 @@ const ContactPage = () => {
                 </p>
                 <Button 
                   onClick={option.onClick}
-                  className="w-full gradient-primary hover:opacity-90 text-white font-semibold"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
                 >
                   {option.action}
                 </Button>
@@ -173,10 +173,10 @@ const ContactPage = () => {
             {/* Contact Form */}
             <div>
               <div className="mb-8">
-                <Badge className="mb-4 gradient-secondary text-white font-medium">
+                <Badge className="mb-4 bg-secondary text-secondary-foreground font-medium">
                   Send Message
                 </Badge>
-                <h2 className="text-3xl md:text-4xl font-bold font-space-grotesk mb-4">
+                <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4 text-foreground">
                   Drop Us a Line
                 </h2>
                 <p className="text-lg text-muted-foreground">
@@ -187,7 +187,7 @@ const ContactPage = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2">
+                    <label htmlFor="name" className="block text-sm font-medium mb-2 text-foreground">
                       Full Name *
                     </label>
                     <Input
@@ -202,7 +202,7 @@ const ContactPage = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">
+                    <label htmlFor="email" className="block text-sm font-medium mb-2 text-foreground">
                       Email Address *
                     </label>
                     <Input
@@ -219,7 +219,7 @@ const ContactPage = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium mb-2">
+                  <label htmlFor="subject" className="block text-sm font-medium mb-2 text-foreground">
                     Subject *
                   </label>
                   <Input
@@ -235,7 +235,7 @@ const ContactPage = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                  <label htmlFor="message" className="block text-sm font-medium mb-2 text-foreground">
                     Message *
                   </label>
                   <Textarea
@@ -253,7 +253,7 @@ const ContactPage = () => {
                 <Button 
                   type="submit" 
                   size="lg" 
-                  className="w-full gradient-primary hover:opacity-90 text-white font-semibold py-6"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-6"
                 >
                   Send Message
                 </Button>
@@ -263,10 +263,10 @@ const ContactPage = () => {
             {/* Contact Information */}
             <div>
               <div className="mb-8">
-                <Badge className="mb-4 bg-electric text-electric-foreground font-medium">
+                <Badge className="mb-4 bg-accent text-accent-foreground font-medium">
                   Contact Info
                 </Badge>
-                <h2 className="text-3xl md:text-4xl font-bold font-space-grotesk mb-4">
+                <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4 text-foreground">
                   Let's Connect
                 </h2>
                 <p className="text-lg text-muted-foreground">
@@ -278,11 +278,11 @@ const ContactPage = () => {
                 {contactInfo.map((info, index) => (
                   <div key={index} className="glass-card p-6 rounded-2xl">
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                        <info.icon className="w-6 h-6 text-white" />
+                      <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
+                        <info.icon className="w-6 h-6 text-primary-foreground" />
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold font-space-grotesk mb-2">
+                        <h3 className="text-lg font-bold font-heading mb-2 text-foreground">
                           {info.title}
                         </h3>
                         <div className="space-y-1">
@@ -316,13 +316,13 @@ const ContactPage = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-surface">
+      <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <Badge className="mb-4 gradient-primary text-white font-medium">
+            <Badge className="mb-4 bg-primary text-primary-foreground font-medium">
               FAQ
             </Badge>
-            <h2 className="text-3xl md:text-4xl font-bold font-space-grotesk mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4 text-foreground">
               Frequently Asked Questions
             </h2>
             <p className="text-lg text-muted-foreground">
@@ -358,7 +358,7 @@ const ContactPage = () => {
               }
             ].map((faq, index) => (
               <div key={index} className="glass-card p-6 rounded-2xl">
-                <h3 className="font-bold text-lg mb-3">{faq.q}</h3>
+                <h3 className="font-bold text-lg mb-3 text-foreground">{faq.q}</h3>
                 <p className="text-muted-foreground">{faq.a}</p>
               </div>
             ))}
